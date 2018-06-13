@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todoList</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div>1.提交生成列表,2.点击列表删除对应列表</div>
+<div id="app">
+    <input type="text" v-model="inputValue">
+    <input @click="sub" type="submit" value="提交">
+    <ul>
+        <todo-item
+                :content="item"
+                :index="index"
+                v-for="(item,index) in lst"
+                @delete="handleItemDelete">
+        </todo-item>
+    </ul>
+
+</div>
+</body>
+</html>
+<script>
+    //全局定义组件
+//    Vue.component("TodoItem", {
+//        props:['content'],
+//        template: " <li>{{content}}</li>"
+//    });
+    
+    //定义局部组件-在app里面也要绑定components
+    var TodoItem = {
+        //绑定数据的变量
+      props:['content','index'],
+      template:"<li @click='delitemlisten'>{{content}}</li>",
+        methods:{
+            delitemlisten:function () {
+              this.$emit('delete',this.index);
+          }
+        }
+    };
+    
+    var app = new Vue({
+        el: "#app",
+        components:{
+            TodoItem:TodoItem
+        },
+        data: {
+            inputValue: '',
+            lst: []
+        },
+     
+        methods: {
+            sub: function () {
+                this.lst.push(this.inputValue);
+                this.inputValue = '';
+            },
+            handleItemDelete:function (index) {
+                this.lst.splice(index,1)
+            }
+        }//methods
+    })
+
+</script>

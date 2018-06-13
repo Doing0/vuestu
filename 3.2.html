@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实列生命周期函数</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">hello word</div>
+
+<script>
+    //时间点时 自动执行的函数 不放在methods里面是独立存在的
+var vm = new Vue({
+    el:"#app"
+    ,beforeCreate:function () {
+        console.log('beforeCreate')
+    }
+    ,create:function () {
+        console.log('create')
+    }
+    ,beforeMount:function () {
+        console.log('beforeMount')
+    }
+    ,Mount:function () {
+        console.log('Mount')
+    }
+    //destroy事件
+    ,beforeDestory:function () {
+        console.log('beforeDestory')
+    }
+    ,destory:function () {
+        console.log('destory')
+    }
+    //data change时
+    ,beforeUpdate:function () {
+        console.log('beforeUpdate')
+    }
+    ,update:function () {
+        console.log('update')
+    }
+})
+
+</script>
+</body>
+</html>

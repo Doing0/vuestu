@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性,方法，侦听器</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--计算属性computed获取全名-->
+    {{allName}} - {{age}}
+    <!--方法methods获取-->
+    {{allNameFun()}}
+</div>
+watch和computed都有缓存机制,但是computed的语法会更简单,methods无缓存功能性能上消耗过大
+<script>
+    var vm = new Vue({
+        el: "#app"
+        , data: {
+            firstName: "Du"
+            , lastName: "Lin"
+            , age: 28
+//            侦听first获取全名
+            ,allName:""
+        }
+        , methods: {
+            //方法获取全名
+            allNameFun: function () {
+                return this.firstName + " " + this.lastName;
+
+            }
+        }
+        ,watch:{
+//            侦听获取 firstName改变时
+            firstName:function () {
+                this.allName = this.firstName + " " + this.lastName;
+            }
+            ,lastName:function () {
+                this.allName = this.firstName + " " + this.lastName;
+            }
+        }
+        //计算属性 当依赖字firstName或者lastName没有改变时,读取缓存
+        , computed: {
+            allName: function () {
+                return this.firstName + " " + this.lastName;
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

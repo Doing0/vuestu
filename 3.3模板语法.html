@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{name + 'hello'}}
+    <div v-text="name + ' hello'"></div>
+    <div v-html="title"></div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el:"#app"
+        ,data:{
+            title:'<h1>Dell</h1>'
+            ,name:'Dell'
+        }
+    })
+
+</script>
+</body>
+</html>
